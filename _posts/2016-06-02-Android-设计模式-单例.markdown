@@ -1,0 +1,163 @@
+---
+layout:     post
+title:      "Android 设计模式"
+subtitle:   "一、单例模式"
+date:       2016-6-2
+author:     "李洋彪"
+header-img: "img/post-bg-js-module.jpg"
+tags:
+    - Android 设计模式
+---
+
+## 1. 模式介绍
+### 模式的定义
+确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。
+
+### 模式的使用场景
+确保某个类有且只有一个对象的场景，例如创建一个对象需要消耗的资源过多，如要访问 IO 和数据库等资源。
+
+## 2. UML类图
+![](https://i.imgur.com/FznZmdf.png)
+
+### 角色介绍
+* Client : 高层客户端。
+* Singleton : 单例类。
+
+## 3. 模式的简单实现
+
+### 简单实现的介绍
+> 由于比较简单，直接上代码模板。
+
+方式一（避免并发时创建了多个实例）：
+
+	public static $class$ mInstance;
+
+	public static $class$ getInstance() {
+	    if (mInstance == null) {
+	        synchronized ($class$.class) {
+	            if (mInstance == null) {
+	                mInstance = new $class$();
+	            }
+	        }
+	    }
+	    return mInstance;
+	}
+
+方式二：
+
+	/**
+	 * 在第一次加载SingletonHolder时初始化一次mOnlyInstance对象, 保证唯一性, 也延迟了单例的实例化,
+	 * 如果该单例比较耗资源可以使用这种模式.
+	 * 
+	 * @return
+	 */
+	public static Singleton getInstanceFromHolder() {
+		return SingletonHolder.mOnlyInstance;
+	}
+
+	/**
+	 * 静态内部类
+	 * 
+	 * @author mrsimple
+	 *
+	 */
+	private static class SingletonHolder {
+		private static final Singleton mOnlyInstance = new Singleton();
+	}
+
+方式三：
+
+	/**
+	 *  方式四 : 枚举单例, 线程安全
+	 * @author mrsimple
+	 *
+	 */
+	enum SingletonEnum {
+		INSTANCE;
+		public void doSomething() {
+			System.out.println("do sth.");
+		}
+	}
+
+方式四：
+
+	/**
+	 * 注册到容器, 根据key获取对象.一般都会有多种相同属性类型的对象会注册到一个map中
+	 * instance容器
+	 */
+	private static Map<string singleton=""> objMap = new HashMap<string singleton="">();
+	/**
+	 * 注册对象到map中
+	 * @param key
+	 * @param instance
+	 */
+	public static void registerService(String key, Singleton instance) {
+		if (!objMap.containsKey(key) ) {
+			objMap.put(key, instance) ;
+		}
+	}
+	
+	/**
+	 * 根据key获取对象
+	 * @param key
+	 * @return
+	 */
+	public static Singleton getService(String key) {
+		return objMap.get(key) ;
+	}
+
+
+## Android源码中的模式实现
+在Android系统中，我们经常会通过Context获取系统级别的服务，比如WindowsManagerService, ActivityManagerService等，更常用的是一个叫LayoutInflater的类。这些服务会在合适的时候以单例的形式注册在系统中，在我们需要的时候就通过Context的getSystemService(String name)获取。我们以LayoutInflater为例来说明, 平时我们使用LayoutInflater较为常见的地方是在ListView的getView方法中。
+
+通常我们使用LayoutInflater.from(Context)来获取LayoutInflater服务, 下面我们看看LayoutInflater.from(Context)的实现。
+
+	public static LayoutInflater from(Context context) {
+        LayoutInflater LayoutInflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (LayoutInflater == null) {
+            throw new AssertionError("LayoutInflater not found.");
+        }
+        return LayoutInflater;
+    }
+
+我们来看**context.getSystemService**抽象方法的具体实现方法：
+
+	@Override
+    public Object getSystemService(@ServiceName @NonNull String name) {
+        if (getBaseContext() == null) {
+            throw new IllegalStateException(
+                    "System services not available to Activities before onCreate()");
+        }
+
+        if (WINDOW_SERVICE.equals(name)) {
+            return mWindowManager;
+        } else if (SEARCH_SERVICE.equals(name)) {
+            ensureSearchManager();
+            return mSearchManager;
+        }
+        return super.getSystemService(name);
+    }
+
+	@Override
+    public Object getSystemService(String name) {
+        if (LAYOUT_INFLATER_SERVICE.equals(name)) {
+            if (mInflater == null) {
+                mInflater = LayoutInflater.from(getBaseContext()).cloneInContext(this);
+            }
+            return mInflater;
+        }
+        return getBaseContext().getSystemService(name);
+    }
+
+
+## 最后说一下
+
+### 优点与缺点
+优点
+
+* 优点很多，可以从性能、内存、资源共享等方面说。
+
+缺点
+
+* 单例模式一般没有接口，扩展很困难，若要扩展，除了修改代码基本上没有第二种途径可以实现。
