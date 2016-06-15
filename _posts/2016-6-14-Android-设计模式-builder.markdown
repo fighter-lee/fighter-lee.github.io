@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "mqtt深入浅出系列"
-subtitle:   "二、mqtt源码分析"
+title:      "Android 设计模式"
+subtitle:   "二、Builder模式"
 date:       2016-6-14
 author:     "李洋彪"
 header-img: "img/post-bg-js-module.jpg"
