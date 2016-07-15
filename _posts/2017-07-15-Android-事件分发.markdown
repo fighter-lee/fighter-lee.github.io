@@ -1,0 +1,14 @@
+---
+layout:     post
+title:      "Android事件分发"
+subtitle:   ""
+date:       2016-07-15
+author:     "李洋彪"
+header-img: "img/post-bg-js-module.jpg"
+tags:
+    - Android
+---
+
+![](https://i.imgur.com/57XY86G.jpg)
+
+![](https://i.imgur.com/jduvyJB.jpg)
