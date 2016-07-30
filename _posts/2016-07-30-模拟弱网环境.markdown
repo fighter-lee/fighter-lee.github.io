@@ -1,0 +1,64 @@
+---
+layout:     post
+title:      "Android测试之模拟弱网环境"
+subtitle:   ""
+date:       2016-7-30
+author:     "李洋彪"
+header-img: "img/post-bg-js-module.jpg"
+tags:
+    - Android
+---
+
+## 前言
+
+开发中难免会碰到或多或少的bug，其中很多是由于网络问题导致的，同时这又难以复现，如何减少这类问题的出现？那就需要我们在开发完一个功能后进行弱网测试了（ps.因为我公司的测试不会使用弱网测试，每次都需要跑到地下车库去测试，会存在很多测试不到的地方，囧。。。所以我们开发完一个功能后自己使用以下教程进行弱网测试）。
+
+## 模拟网络延时
+
+需要用到Fiddler工具，下载链接如下：
+
+链接：https://pan.baidu.com/s/1dGrBT6L 密码：tghm
+
+fiddler主要是使用Rules->Performance->Simulate Modem Speeds功能进行的网络延迟模拟，点击Rules->Customize Rules进行设置，打开自定义脚本编辑器，如下图所示：
+
+![](https://i.imgur.com/vFe9m3K.png)
+
+红框内标出的就是设置延迟时可以操作的上行和下行网络延迟时间，意为每上传／下载1KB的数据要延迟多少毫秒。这里我把请求（上行）时间延迟设置为3000ms，响应（下行）时间延迟设置为1500ms（模拟了2G网络的速度）。
+这里通过计算上行和下行的网络延迟时间，可以模拟出想要的网络效果。利用 （1KB/下载速度）x1000 = 要delay的毫秒数。
+
+设置完成后，在fiddler里将Rules->Performance->Simulate Modem Speeds选中即可使设置生效。
+
+## 模拟网络丢包
+
+fiddler只能设置延迟，无法进行丢包的设置。在windows上有个简单易用的工具Network Emulation for Windows Toolkit可以用来设置网络丢包情况。设置丢包有两个关键步骤，一是设置电脑网络，二是将移动设备接入电脑共享的网络。详细看下每个步骤：
+
+### Network Emulation for Windows Toolkit设置网络丢包
+Network Emulation for Windows Toolkit的下载地址如下：
+
+链接：https://pan.baidu.com/s/1ggMFVNX 密码：dol6
+
+我们点击顶部菜单栏Configuration->New Filter，在弹出的设置框里点击Add，新增一个过滤器，如下图所示：
+
+![](https://i.imgur.com/p9uUVV9.png)
+
+接着点击Configuration->New Link新增一条链路，此时界面显示如下：
+
+![](https://i.imgur.com/mS088Yz.png)
+
+我们没有对网络做任何限制，此时网络是畅通的，ping一下看：
+
+![](https://i.imgur.com/G3lm0s5.png)
+
+果然没有任何丢失，且无超时发生。
+此时我们设置网络丢包，在新建链路点击右键，选择Upstream设置上行网络。这里我们设置了随机丢包率为25%：
+
+![](https://i.imgur.com/096qdsL.png)
+
+同理也可以设置下行网络。设置完成后要点击Action->Start开始使设置生效。生效后我们再来ping一下网络看看：
+
+![](https://i.imgur.com/pcbRXzi.png)
+
+可以看到此时有丢包和超时发生了
+
+### 移动端设备接入电脑网络
+如果电脑自带网卡驱动，那好办，下载一个猎豹wif，手机连入该wifi即可，如果电脑没有网卡呢，那就需要通过USB共享网络了。
