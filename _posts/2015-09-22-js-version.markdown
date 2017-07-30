@@ -6,7 +6,7 @@ date:       2015-09-22
 author:     "Hux"
 header-img: "img/post-bg-js-version.jpg"
 tags:
-    - Anroid
+    - Android
     - JavaScript
     - 翻译
 ---
