@@ -33,3 +33,9 @@ adb shell am broadcast -a com.Android.test --es test_string "this is test string
 
 
 说明：蓝色为key，红色为alue，分别为String类型，int类型，boolean类型
+
+adb 启动应用：
+adb shell am start -n 包名/.mainactivity
+
+adb 停止应用
+adb shell am force-stop 包名
