@@ -1,0 +1,63 @@
+---
+layout:     post
+title:      "Android反编译"
+subtitle:   "简单实用"
+date:       2016-05-08
+author:     "李洋彪"
+header-img: "img/post-bg-js-module.jpg"
+tags:
+    - Android
+---
+
+###方案一：jadx
+>下载地址：https://github.com/skylot/jadx
+
+**mac电脑**： 
+
+打开终端，切到某个路径下，输入以下命令：
+
+git clone https://github.com/skylot/jadx.git  
+
+cd jadx  
+
+./gradlew dist  
+
+其实这里只是做了两个动作：
+
+第一，使用git命令将 项目clone下来（这里需要配置git环境，如果没有，请先搜资料配置git环境，然后再来）
+
+然后，执行jadx目录 下gradlew脚本，这个是shell脚本
+
+**windows电脑：**
+
+git clone https://github.com/skylot/jadx.git  
+
+cd jadx  
+
+gradlew.bat dist  
+
+在windows电脑中，步骤与mac是一样的，只是最后一步中，已经不再是./gradlew所对应的shell脚本了，而是windows平台上的bat脚本。 
+
+编译成功后会打出BUILD SUCCESS字样。
+
+在编译成功后，在jadx目录下，会生成一个build目录，其中包含jadx目录和一个jadx-xxx-dev.zip的打包文件。在build/jadx目录下，就是源码编译出的jadx工具及所用jar包。jadx-xxx-dev.zip解压后的内容与build/jadx内容一样，只是将其打包了一下而已，方便移值，可见作者有多用心。build目录结构如下图所示：
+![](http://i.imgur.com/irsz9uN.png)
+
+**2、开始反编译**
+等完毕后,可以开始了,我就介绍个最简单最常用的用法 
+
+（1）、把apk改成zip 
+
+（2）、解压zip获取class.dex文件 
+
+（3）、将class.dex文件放到jadx目录下
+
+    cd build/jadx/bin  
+    jadx -d out ../classes.dex  # 反编译后放入out文件夹下(如果out不存在它会自动创建)  
+    #or  
+    jadx-gui ../classes.dex  # 会反编译,并且使用gui打开  
+在使用jadx-gui反编译时，左下角会显示当前反编译的进度：
+![](http://i.imgur.com/zo5dzbM.png)
+
+###方案二：apktool+dex2jar+jd-gui工具集
+>下载地址：https://github.com/ufologist/onekey-decompile-apk
