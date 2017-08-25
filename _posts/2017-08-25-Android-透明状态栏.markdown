@@ -40,3 +40,24 @@ toolbar显示到状态栏去了，经过谷歌，在Toolbar中添加属性：
 ![](http://i.imgur.com/rzOGhVZ.png)
 
 但是又有问题了，toolbar中的控件不对齐了
+
+于是修改布局至如下：
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/toolbar_padding_top"
+    android:background="@color/primary_color"
+    android:minHeight="?attr/actionBarSize"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+然后我们还需要在values, values-v19两个文件夹下分别声明toolbar_padding_top变量，values文件夹下值为0，而values-v19文件夹下值为25.
+
+至于为什么要这么改呢：
+解决方案就是利用状态栏的高度，在4.4以上的版本给Toolbar设置一个paddingTop的属性为status_bar的高度，然后让他“全屏”，Toolbar就自然的延伸到了status_bar的位置，而且在4.4系统status_bar默认就是透明，在5.0以上status_bar是半透明。而至于status_bar的高度从源码查看得知为25dp。
+
+![](http://i.imgur.com/DSgh2j0.png)
