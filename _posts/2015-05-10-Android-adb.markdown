@@ -11,7 +11,7 @@ tags:
 ---
 
 
-通过命令行执行adb shell am broadcast发送广播通知。
+**通过命令行执行adb shell am broadcast发送广播通知。**
 
 adb shell am broadcast 后面的参数有：
 
@@ -39,3 +39,15 @@ adb shell am start -n 包名/.mainactivity
 
 adb 停止应用
 adb shell am force-stop 包名
+
+**启动activity**
+
+adb shell am start -n 包名/启动activity路径
+
+例如：
+
+adb shell am start -n com.fighter-lee.mydemo/com.fighter-lee.mydemo.MainActivity
+
+**启动service**
+
+adb shell am startservice -n com.adups.fota_iot/com.adups.fota_demo_iot.service.OTAEngine
