@@ -1,0 +1,46 @@
+---
+layout:     post
+title:      "Chrome必备插件"
+subtitle:   "程序员必备"
+date:       2017-06-20
+author:     "李洋彪"
+header-img: "img/post-bg-js-module.jpg"
+tags:
+    - Chrome
+---
+
+### Adblock Plus
+
+![](https://i.imgur.com/cLBAOHN.png)
+
+**介绍**：屏蔽广告插件，特别好用。
+
+### LastPass
+
+![](https://i.imgur.com/jpPonXy.png)
+
+**介绍**：保存你的密码,让你安全访问任何计算机和移动设备，对于我这种不喜欢把密码设置成一个的又经常忘密码的，简直是福利啊。
+
+### ImTranslator
+
+![](https://i.imgur.com/OjlQGZY.png)
+
+**介绍**：翻译、字典，比有道、谷歌翻译好用，对于经常需要看英文博客和文档英语不太好的，很实用。
+
+### Octotree
+
+![](https://i.imgur.com/2Fh4zk8.png)
+
+**介绍**:经常逛github必备，看项目结构和跳转太好用了；
+
+### EverSync
+
+![](https://i.imgur.com/jHKdc6e.png)
+
+**介绍**:在多个电脑多个浏览器上同步书签，用法和git类似，但是比git容易很多。
+
+### codota
+
+![](https://i.imgur.com/kxoOwvt.png)
+
+**介绍**:在Stack Overflow上代码高亮显示，显示类的部分用法，看代码都带劲了。
