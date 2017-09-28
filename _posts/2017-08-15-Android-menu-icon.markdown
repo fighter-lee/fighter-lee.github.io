@@ -2,7 +2,7 @@
 layout:     post
 title:      "NavigationView 侧滑栏menu实现右侧自定义布局"
 subtitle:   ""
-date:       2017-08-25
+date:       2017-08-15
 author:     "李洋彪"
 header-img: "img/post-bg-js-module.jpg"
 tags:
