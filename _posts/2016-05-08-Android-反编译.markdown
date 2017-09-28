@@ -9,7 +9,7 @@ tags:
     - Android
 ---
 
-###方案一：jadx
+### 方案一：jadx
 >下载地址：https://github.com/skylot/jadx
 
 **mac电脑**： 
@@ -59,5 +59,5 @@ gradlew.bat dist
 在使用jadx-gui反编译时，左下角会显示当前反编译的进度：
 ![](http://i.imgur.com/zo5dzbM.png)
 
-###方案二：apktool+dex2jar+jd-gui工具集
+### 方案二：apktool+dex2jar+jd-gui工具集
 >下载地址：https://github.com/ufologist/onekey-decompile-apk

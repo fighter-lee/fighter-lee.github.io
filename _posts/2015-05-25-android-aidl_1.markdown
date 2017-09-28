@@ -15,15 +15,15 @@ tags:
 
 ![437.gif](http://upload-images.jianshu.io/upload_images/4126773-42c5cfe7d10d4855.gif?imageMogr2/auto-orient/strip)
 
-###什么是aidl呢
+### 什么是aidl呢
 AIDL是Android Interface Definition Language的缩写，见名知意，Android接口定义语言。嗯，可我还是不懂什么是接口定义语言，用官方的说法是定义客户端与服务使用进程间通信 (IPC) 进行相互通信时都认可的编程接口，说白了，其实就是跨进程通信。
 
 看到这你可能会问，跨进程通信的方式有广播、ContentProvider，Messenger，那我为什么要选AIDL呢，确实，Messenger要比aidl使用起来更加简单，但是aidl的好处用官方原话是：只有允许不同应用的客户端用 IPC 方式访问服务，并且想要在服务中处理多线程时，才有必要使用 AIDL。说白了，如果你想要跨应用、多线程并发访问，aidl是最好的选择。
 
-###进入正题，没有什么比一个demo更生动了
+### 进入正题，没有什么比一个demo更生动了
 >通过这个demo了解如何实现跨应用通信
 
-####1. 服务端代码（即提供数据给客户端）
+#### 1. 服务端代码（即提供数据给客户端）
 1. 先建一个aidl，如图：
 
 ![QQ图片20170610165852.png](http://upload-images.jianshu.io/upload_images/4126773-fc046db296eb5396.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -120,7 +120,7 @@ AIDL是Android Interface Definition Language的缩写，见名知意，Android�
             </intent-filter>
      </service>
 
-####2. 客户端代码（获取服务端的数据）
+#### 2. 客户端代码（获取服务端的数据）
 
 然后我们又建一个module，建一个和服务端一样的aidl文件，包名也必须一样，如图：
 

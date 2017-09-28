@@ -50,7 +50,7 @@ tags:
     
     git push origin master  
 
-###**提交时，可能出现的问题：**
+### **提交时，可能出现的问题：**
 
     $ git push origin master  
     To github.com:JasonLi-cn/test.git  
@@ -77,7 +77,7 @@ tags:
     git pull origin master --allow-unrelated-histories  
 然后就可以 push了！！！
 
-###三、公钥和密钥配置方法
+### 三、公钥和密钥配置方法
 在Git bash中执行：
 
     ssh-keygen -t rsa  
@@ -99,7 +99,7 @@ SSH key 添加成功之后，输入
     $ ssh -T git@github.com
     Hi JasonLi-cn! You've successfully authenticated, but GitHub does not provide shell access.  
 
-###四、其它常用命令
+### 四、其它常用命令
     [plain] view plain copy
     git branch aaa 新建分枝aaa  
     git branch 查看分枝  

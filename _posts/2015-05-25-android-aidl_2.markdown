@@ -38,7 +38,7 @@ IServiceListener代码：
 
 需要注意包名是否正确。
 
-###client控制server端下载并回调进度：
+### client控制server端下载并回调进度：
 
 1.绑定service，同上一节：
 
@@ -89,7 +89,7 @@ IServiceListener代码：
                         }
                     });
 
-###server端下载
+### server端下载
 
 下面模拟回调：
 

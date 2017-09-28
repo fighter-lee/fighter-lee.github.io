@@ -16,11 +16,11 @@ tags:
 
 ![6af89bc8gw1f8qksbvy3wj208c08c74e.jpg](http://upload-images.jianshu.io/upload_images/4126773-1df8371eece935dc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###1.当然是注册
+### 1.当然是注册
 个人免费版注册地址：https://bintray.com/signup/oss
 >之前在这就碰到一个坑，很多博客上说的注册地址是 https://bintray.com （企业版），然后我跟着做到最后一步，发现怎么都没有"Add to jcenter"按钮，各种谷歌，才找到问题。。。
 
-###2.根据图解一步步添加
+### 2.根据图解一步步添加
 ![Q~0]Z%4F5TD$1V4])`B9Q6E.png](http://upload-images.jianshu.io/upload_images/4126773-8b43f0c961d9299f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![DQX61PIX7XJ8{_080SJI14S.png](http://upload-images.jianshu.io/upload_images/4126773-4b96198e38fa76c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -39,7 +39,7 @@ tags:
 
 做完以上操作后，那么可以上传代码了
 
-###3.配置项目信息
+### 3.配置项目信息
 配置module下build.gradle
 
     apply plugin: 'com.android.library'
@@ -197,7 +197,7 @@ tags:
 输入密码后就能看到了
 
 
-###4.编译上传
+### 4.编译上传
 
 执行命令： gradlew install
 成功后可以看到如下图的doc文档：
@@ -216,7 +216,7 @@ tags:
 
 点击add to jcenter 按钮后，申请将我们的依赖库传入jcenter，一般隔夜能审核通过。
 
-###5.坑与解
+### 5.坑与解
 1. 坑一：错误: 编码GBK的不可映射字符->请正确配置javadoc编码
    在项目下的build.gradle 下添加如下，将中文注释改成英文，别问我怎么知道的~
     

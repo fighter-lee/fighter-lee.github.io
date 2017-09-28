@@ -14,7 +14,7 @@ tags:
 
 > 在JavaBean的设计中，按照属性的不同作用又细分为四类：单值属性、索引属性、关联属性、限制属性。关联属性，也称之为绑定属性。绑定属性会在属性值发生变化时，通知所有相关的监听器。
 
-####先介绍几个api吧
+#### 先介绍几个api吧
 ##### 类PropertyChangeSupport
 1. **[addPropertyChangeListener](https://docs.oracle.com/javase/7/docs/api/java/beans/PropertyChangeSupport.html#addPropertyChangeListener(java.beans.PropertyChangeListener))**([PropertyChangeListener](https://docs.oracle.com/javase/7/docs/api/java/beans/PropertyChangeListener.html) listener)
 顾名思义，添加对bean的监听。
@@ -23,7 +23,7 @@ tags:
 3. **[firePropertyChange](https://docs.oracle.com/javase/7/docs/api/java/beans/PropertyChangeSupport.html#firePropertyChange(java.lang.String,%20int,%20int))**([String](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html) propertyName, int oldValue, int newValue)
 添加对bean内某个变量的监听，第一个参数最好是变量名，第二个是变量改变前的值，第二个是变量改变后的值
 
-####类PropertyChangeEvent
+#### 类PropertyChangeEvent
 > https://docs.oracle.com/javase/7/docs/api/java/beans/PropertyChangeEvent.html
 
 1. getPropertyName()
@@ -35,7 +35,7 @@ tags:
 4. getNewValue()
 获取发生改变的变量的新值。
 
-####ok，不多说，上代码
+#### ok，不多说，上代码
 javabean类
 
     public class DeviceInfo {
