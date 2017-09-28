@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "NavigationView 侧滑栏menu实现右侧自定义布局"
+title:      "mqtt深入浅出"
 subtitle:   ""
 date:       2017-08-15
 author:     "李洋彪"
@@ -9,62 +9,21 @@ tags:
     - Android
 ---
 
-效果图：
-![](http://i.imgur.com/1U5HI1w.png)
+如何使用请参考此篇博客，写的通俗易懂。
 
-布局：
-	
-	<android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:openDrawer="start">
+[Android APP必备高级功能，消息推送之MQTT](http://blog.csdn.net/qq_17250009/article/details/52774472)
 
-        <include
-            layout="@layout/drawer_content_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+## 源码分析
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/drawer_menu_layout"
-            app:menu="@menu/activity_main_drawer"/>
+### 获取源码文件
 
-    </android.support.v4.widget.DrawerLayout>
+github上是没有mqtt源码的，虽然我们能从远程依赖上拿到jar包，但是因为java文件编译后成class文件后注释、常量、以及部分方法都发生了一些变化，可读性很差，那我们如何拿源码呢，当然是jcenter了，如图：
 
-menu（需要在item下添加相对应的layout）：
+在jcenter官网上搜索关键字：eclipse.paho.client.mqttv3
 
-	<?xml version="1.0" encoding="utf-8"?>
-	<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+点进去后，找一下以下文件，如图的那个就是java文件（下载下来后改成zip格式，然后解压就好啦）
 
-    <group android:checkableBehavior="single">
+![](https://i.imgur.com/UZIdDrm.png)
 
-        <item
-            android:id="@+id/deleteFile"
-            android:icon="@mipmap/round"
-            android:title="@string/delete_package"/>
-        <item
-            android:id="@+id/local_upgrade"
-            android:icon="@mipmap/round"
-            android:title="@string/local_update"/>
-        <item
-            android:id="@+id/ota_login_logout"
-            android:icon="@mipmap/round"
-            android:title="@string/login"
-            app:actionLayout="@layout/online_layout"/>
+### connect
 
-    </group>
-
-</menu>
-
-获取menu及menu对应的布局
-
-	Menu menu = navView.getMenu();
-    menu_login_logout = menu.findItem(R.id.ota_login_logout);
-    LinearLayout ll_action_view = (LinearLayout) menu_login_logout.getActionView();
-    mIv_online = (ImageView) ll_action_view.findViewById(R.id.iv_online);
