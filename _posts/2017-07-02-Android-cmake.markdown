@@ -156,3 +156,5 @@ log 指定使用log库
 
 可以将cmake都注释掉，然后运行，发现和之前是一样的结果也，如果你不信，可以将cpp文件删掉后再运行。
 
+[源码地址](https://github.com/fighter-lee/JniTest):https://github.com/fighter-lee/JniTest
+
