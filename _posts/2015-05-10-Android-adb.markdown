@@ -31,6 +31,7 @@ adb shell am broadcast 后面的参数有：
 
 adb shell am broadcast -a com.Android.test --es test_string "this is test string" --ei test_int 100 --ez test_boolean true
 
+--es 前面为双横线
 
 说明：蓝色为key，红色为alue，分别为String类型，int类型，boolean类型
 
@@ -51,3 +52,7 @@ adb shell am start -n com.fighter-lee.mydemo/com.fighter-lee.mydemo.MainActivity
 **启动service**
 
 adb shell am startservice -n com.adups.fota_iot/com.adups.fota_demo_iot.service.OTAEngine
+
+**adb修改时间**
+
+adb shell date -s "20171010.120000"
