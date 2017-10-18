@@ -34,7 +34,7 @@ Androidstudio添加如下依赖：
 
 	compile 'top.fighter-lee:mqttlibs:1.0.1'
 
-####搭建服务器
+#### 搭建服务器
 > 如果有自己的mqtt服务器的话，请跳过此步骤。
 
 1. 请[点击](http://activemq.apache.org/apollo/download.html),下载Apollo服务器，安装。
@@ -49,9 +49,9 @@ Androidstudio添加如下依赖：
 5. 在浏览器输入http://127.0.0.1:61680/，查看是否安装成功。
 	![](https://i.imgur.com/ZfYkZU0.png)
 
-#### 客户端编码
+### 客户端编码
 
-##### 连接
+#### 连接
 
 **先介绍API吧**。
 
@@ -138,7 +138,7 @@ ConnectCommand为连接操作类，可以设置相应属性。
 	![](https://i.imgur.com/fc8zFPx.png)
 4. setUserNameAndPassword，若使用的是Apollo服务器，则默认的用户名是admin，密码是：password。
 
-####发送消息
+#### 发送消息
 
 **API**
 
