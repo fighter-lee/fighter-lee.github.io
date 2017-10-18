@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "mqtt深入浅出"
-subtitle:   ""
+title:      "mqtt深入浅出系列"
+subtitle:   "一、mqtt介绍与使用"
 date:       2017-08-15
 author:     "李洋彪"
 header-img: "img/post-bg-js-module.jpg"
