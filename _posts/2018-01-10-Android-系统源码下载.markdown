@@ -1,0 +1,63 @@
+---
+layout:     post
+title:      "Android源码下载"
+subtitle:   ""
+date:       2018-1-10
+author:     "李洋彪"
+header-img: "img/post-bg-js-module.jpg"
+tags:
+    - Android
+---
+
+## 前言
+
+Android 源代码树位于由 Google 托管的 Git 代码库中。Git 代码库中包含 Android 源代码的元数据，其中包括与对源代码进行的更改以及更改日期相关的元数据。本文档介绍了如何下载特定 Android 代码的源代码。
+
+## Ubuntu环境搭建
+
+### 下载虚拟机和Ubuntu镜像文件
+
+链接：https://pan.baidu.com/s/1oAn5Nj8 密码：bbio
+
+## 安装 Repo
+Repo 是一款工具，可让您在 Android 环境中更轻松地使用 Git
+
+要安装 Repo，请执行以下操作：
+
+1.确保主目录下有一个 bin/ 目录，并且该目录包含在路径中：
+	
+	mkdir ~/bin
+	PATH=~/bin:$PATH
+
+2.下载 Repo 工具，并确保它可执行：
+
+	curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+	chmod a+x ~/bin/repo
+
+3.初始化 Repo 客户端
+>由于访问谷歌太慢，使用国内镜像。
+
+建立工作目录:
+
+	mkdir WORKING_DIRECTORY
+	cd WORKING_DIRECTORY
+
+初始化仓库:
+
+	repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest
+
+如果需要某个特定的 Android 版本(列表)：
+
+	repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b android-4.0.1_r1
+查看Android版本（替换一下上面的版本就好啦）：https://source.android.com/source/build-numbers#source-code-tags-and-builds
+
+同步源码树（以后只需执行这条命令来同步）：
+
+	repo sync
+
+	//或者4并发下载
+	repo sync -j4
+
+[清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/)
+
+[Android官方教程](https://source.android.google.cn/source/downloading?hl=zh-cn)
