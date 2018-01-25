@@ -1,0 +1,98 @@
+---
+layout:     post
+title:      "Android—单元测试"
+subtitle:   "一、Junit"
+date:       2018-1-25
+author:     "李洋彪"
+header-img: "img/post-bg-love1.jpg"
+tags:
+    - Android
+---
+
+## 前言
+Android Studio 以简化测试为设计宗旨。 您只需完成几次点击，便可建立一个在本地 JVM 上运行的 JUnit 测试，或建立一个在设备上运行的仪器测试
+
+## 本地单元测试
+
+> 适用场景：这些测试在计算机的本地 Java 虚拟机 (JVM) 上运行。 当您的测试没有 Android 框架依赖项或当您可以模拟 Android 框架依赖项时，可以利用这些测试来尽量缩短执行时间。
+
+在应用模块的 build.gradle 文件中指定测试库依赖项：
+
+	dependencies {
+	    // Required for local unit tests (JUnit 4 framework)
+	    testCompile 'junit:junit:4.12'
+	}
+
+### 手动建立 
+1. 在左侧的 Project 窗口中，点击下拉菜单并选择 Project 视图。 
+2. 展开相应的模块文件夹和嵌套的 src 文件夹。 要添加本地单元测试，请展开 test 文件夹和嵌套的 java 文件夹；要添加仪器测试，请展开 androidTest 文件夹和嵌套的 java 文件夹。
+3. 右键点击 Java 软件包目录并选择 New > Java Class。
+4. 命名文件，然后点击 OK。
+
+### AS自动创建
+
+1. 打开包含您想测试的代码的 Java 文件。
+2. 点击您想测试的类或方法，然后按 Ctrl+Shift+T (⇧⌘T)。
+3. 在出现的菜单中，点击 Create New Test。
+4. 在 Create Test 对话框中，编辑任何字段并选择任何要生成的方法，然后点击 OK。
+5. 在Choose Destination Directory 对话框中，点击与您想创建的测试类型对应的源集：androidTest 对应于仪器测试，test 对应于本地单元测试。
+
+如图：
+![](https://i.imgur.com/EJBEzAI.png)
+
+### 编写测试代码
+简单写一点点：
+
+	public class UtilsTest {
+
+	    @Before
+	    public void setUp() throws Exception {
+	        MockitoAnnotations.initMocks(this);
+	        System.out.println("setUp");
+	
+	    }
+	
+	    @Test
+	    public void test1() throws Exception {
+	        Assert.assertEquals(Utils.test1(),"is test1");
+	    }
+	
+	    @Test
+	    public void test2() throws Exception {
+	        Assert.assertEquals(Utils.test2("1","2"),"21");
+	    }
+	}
+
+### 运行测试
+要运行测试，请执行如下操作
+
+1. 点击工具栏中的 Sync Project，确保您的项目已与 Gradle 同步。
+	1. 以下列其中一种方式运行测试：
+	1).在 Project 窗口中，右键点击测试，然后点击
+	2).来测试该类中的所有方法。 要运行所有测试，右键点击测试目录，然后点击 Run tests
+
+默认情况下，您的测试运行时使用的是 Android Studio 默认的运行配置。 如果您想更改某些运行设置（例如仪器运行器和部署选项），可以在 Run/Debug Configurations 对话框中编辑运行配置（点击 Run > Edit Configurations）
+
+
+### 编写测试代码详解
+#### Assert
+![](https://i.imgur.com/cvpA2O0.png)
+
+#### JUnit 中的注解及含义
+![](https://i.imgur.com/FYTMZjK.png)
+
+#### 超时
+Junit 提供了一个指定超时参数。如果一个测试用例执行的毫秒数超过了指定的参数值，那么 Junit 将自动将它标记为失败。
+
+	@Test(timeout=1000)
+	public void test() {
+	    ...
+	}
+
+#### 捕获异常
+
+    @Test(expected = ArithmeticException.class)
+    public void testException() {
+        int b = 1/0;
+        System.out.println(b);
+    }
