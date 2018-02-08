@@ -128,7 +128,7 @@ tags:
         Phone{
 			dimension  'device_type'
             buildConfigField("String", "APP_LAUNCH_ACTIVITY", APP_LAUNCH_ACTIVITY_IOT)
-            buildConfigField("String", "APP_TYPE", APP_TYPE_IOT)
+            buildConfigField("String", "APP_TYPE", APP_TYPE_Phone)
             applicationIdSuffix ".phone"
             versionNameSuffix "-phone
         }
@@ -162,5 +162,69 @@ buildAPK后可以生成如图的APP：
 ![](https://i.imgur.com/aSq2pIX.png)
 
 ## 清单文件合并(AndroidManifest)
+各个变体肯定需要差异化，不同的APPName、icon、或者是业务逻辑，要做到这些，需要先学习如何合并AndroidManifest。
 
+首先建立对应的源集，默认的方式如图：
 
+![](https://i.imgur.com/4YELSS4.png)
+
+然后建立对应的AndroidManifest文件
+
+![](https://i.imgur.com/veM7Y0g.png)
+
+### 合并优先级
+可能你没有合并过AndroidManifest，但是肯定有这样的体验，以前我们使用jar包时需要在AndroidManifest中添加jar包中的组件和权限，但是在使用model或者远程依赖或者aar时就不需要添加，其实编译时就有合并的操作。
+
+合并 3 个清单 文件（从优先级最低的文件（左）合并至优先级最高的文件（右））的流程：
+![](https://i.imgur.com/lesmpAH.png)
+
+那我们的变体是如何去合并的呢？
+
+优先级如下（由高到低）（其实是定制程度高低决定）：
+
+1. 构建变体清单（如 src/demoDebug/）
+2. 构建类型清单（如 src/debug/）
+3. 产品定制清单（如 src/demo/）
+
+### 合并冲突解决
+内容较多，可以参考官方指南：https://developer.android.com/studio/build/manifest-merge.html#_3
+
+官方文档介绍比较清楚了，这里不再重述。
+
+## 构建差异
+
+### noIcon变种去掉启动图标
+
+在对应noIcon的变种集下，AndroidManifest代码如下：
+
+	<activity
+            android:name=".view.activity.CarActivity"
+            android:configChanges="keyboard|screenSize|orientation"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:node="merge">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category
+                    android:name="android.intent.category.LAUNCHER"
+                    tools:node="remove"/>
+            </intent-filter>
+        </activity>
+
+即采用上文提到的 **合并冲突解决** 中的方式将启动LAUNCHER去掉。
+
+### 不同变种启动的activity不同
+可以将main中的启动activity去掉，在变体源集中将对应的activity添加进来，那么，按照合并优先级，变体源集中的activity会被合并进来。
+
+### 不同的变体代码逻辑不同
+可以看到上文 **组合多个产品风味** 中，有在产品风味中增加buildConfigField("String", "APP_TYPE", APP_TYPE_CAR)代码。
+
+那么我们可以在代码中拿到这个标识，进行逻辑区分。
+
+	BuildConfig.APP_TYPE;
+
+### 不同的代码和资源文件
+在对应的源集下进行编码和存放资源文件即可，但是注意不要类路径和类名不要一样，不然会有冲突。
+
+![](https://i.imgur.com/hOepTKS.png)
