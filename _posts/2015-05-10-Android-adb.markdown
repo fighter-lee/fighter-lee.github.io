@@ -11,6 +11,12 @@ tags:
 ---
 
 
+一个非常全的总结：[click](https://github.com/mzlogin/awesome-adb)
+
+链接如下：
+
+https://github.com/mzlogin/awesome-adb
+
 **通过命令行执行adb shell am broadcast发送广播通知。**
 
 adb shell am broadcast 后面的参数有：
