@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.pal.train",
+    "sha256_cert_fingerprints":
+    ["95:63:3E:54:05:97:40:21:F4:C3:76:93:B2:1C:AC:93:6E:DF:25:2F:E3:84:E8:D3:19:65:AB:DF:D7:B2:16:3E"]
+  }
+}]
